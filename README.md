@@ -106,10 +106,6 @@ Scripts disponíveis para visualização:
 - `temperatura_maxima.py`: mapa de temperatura máxima;
 - `temperatura_minima.py`: mapa de temperatura mínima.
 
-Exemplo de gráfico que pode ser gerado:
-
-<img src="https://github.com/user-attachments/assets/d5f644e7-7dae-4a44-8b64-a936b4dd14e9" width="500"/>
-
 # Como rodar o projeto
 
 1. Clonar  repositório
