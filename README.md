@@ -6,7 +6,19 @@ Este projeto tem como objetivo coletar, processar e analisar dados climáticos d
 
 ### 1. Coleta do nome das cidades: Extração via Web Scraping da lista de municípios dos trẽs estados da região Sul a partir da Wikipédia.
 
-📁 cidades_sul
+📁 cidades_sul/script
+
+Nesta pasta, está disponível em `get_cities.py` o código utilizado para extrair das tabelas contidas em páginas da Wikipédia o nome de todas as cidades pertencentes aos estados do Paraná, Santa Catarina e Rio Grande do Sul utilizando BeautifulSoup.
+
+Nessa mesma pasta, também está disponível o código `get_lat_lon.py`, onde foi utilizada a API Nominatim para consultar a latitude e longitude de todas as cidades 1192 cidades extraídas no código anterior. 
+
+📁 cidades_sul/data
+
+Nessa pasta, constam dois arquivos .csv: 
+
+- `cidades_sul_brasil.csv`: contém as cidades obtidas pelo site Wikipedia e o estado a qual elas pertencem.
+
+- `cidades_sul_brasil_coordinates_lat_lon.csv`: contém as cidades obtidas pelo site Wikipedia, o estado a que elas pertencem e sua respectiva latitude e longitude.
 
 2. Obtenção de coordenadas geográficas: Uso da API Nominatim para adquirir latitude e longitude de cada cidade.
 
