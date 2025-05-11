@@ -84,4 +84,14 @@ flowchart LR
 
 ```
 
+### 3. Consumindo o banco de dados 
+
+📁 plot_clima_tempo/scripts
+
+O banco de dados é consultado a partir do SUPABASE_URL e SUPABASE_KEY e, para testes, foram criados os códigos `prob_chuva.py`, `temperatura_maxima.py` e `temperatura_minima.py`. Esses gráficos utilizam um arquivo .shapefile da região sul, disponibilizado pelo IBGE, para delimitar o território e realizar uma interpolação, resultando em gráficos climáticos como:
+
+
+![Figure_1](https://github.com/user-attachments/assets/e5c92e89-1dc6-4413-a45b-8b686bd91bfc)
+
+
 
