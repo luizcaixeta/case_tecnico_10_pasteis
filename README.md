@@ -52,7 +52,7 @@ Objetivo: Obter dados metereológicos dos três próximos dias (sábado, domingo
 
 📁clima/scripts
 
-- `collect_weather.py:` Realiza requisições à API Open-Meteo com base nas coordenadas presentes no arquivo `cidades_sul_brasil_coordinates_lat_lon.csv`, gerando o arquivo weather_data_raw.csv.
+- `collect_weather.py:` Realiza requisições à API Open-Meteo com base nas coordenadas presentes no arquivo `cidades_sul_brasil_coordinates_lat_lon.csv`, gerando o arquivo `weather_data_raw.csv`.
 
 - `clean.py:` Responsável pela limpeza dos dados brutos.
 
