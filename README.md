@@ -1,24 +1,28 @@
-# Case técnico: Extração de dados climáticos das cidades do Sul do Brasil
+# 🌤️ Case técnico: Extração de dados climáticos das cidades do Sul do Brasil
 
 ## Descrição do projeto
 
-Este projeto tem como objetivo coletar, processar e analisar dados climáticos das cidades da região Sul do Brasil (Paraná, Santa Catarina e Rio Grande do Sul). O processo está dividio em três etapas principais:
+Este projeto tem como objetivo coletar, processar e carregar (para um banco de dados PostGres) dados climáticos das cidades da região Sul do Brasil, abrangendo os estados do Paraná, Santa Catarina e Rio Grande do Sul. O fluxo está dividido em três etapas principais:
 
-### 1. Coleta de dados geográficos de cidade do sul do Brasil: Extração via Web Scraping da lista de municípios dos três estados da região Sul a partir da Wikipédia e dados de latitude e longitude via API Nominatim.
+### 1. Coleta de dados geográficos
 
-📁 cidades_sul/script
+Objetivo: Extrair a lista de municípios dos três estados da região Sul a partir da Wikipédia e obter suas respectivas coordenadas geográficas (latitude e longitude) via API Nominatim.
 
-Nesta pasta, está disponível em `get_cities.py` o código utilizado para extrair das tabelas contidas em páginas da Wikipédia o nome de todas as cidades pertencentes aos estados do Paraná, Santa Catarina e Rio Grande do Sul utilizando BeautifulSoup.
+📁 cidades_sul/script:
 
-Nessa mesma pasta, também está disponível o código `get_lat_lon.py`, onde foi utilizada a API Nominatim para consultar a latitude e longitude de todas as cidades 1192 cidades extraídas no código anterior. 
+- `get_cities.py`: Código responsável por realizar Web Scraping nas páginas da Wikipédia para extrair os nomes de todas as cidades do Paraná, Santa Catarina e Rio Grande do Sul, utilizando a biblioteca BeautifulSoup.
+
+- `get_lat_lon.py`: Utiliza a API Nominatim para obter as coordenadas (latitude e longitude) das 1.192 cidades extraídas.
 
 📁 cidades_sul/data
 
 Nessa pasta, constam dois arquivos .csv: 
 
-- `cidades_sul_brasil.csv`: contém as cidades obtidas pelo site Wikipedia e o estado a qual elas pertencem.
+- `cidades_sul_brasil.csv`: Lista de cidades e o estado correspondente extraídas da Wikipédia.
 
-- `cidades_sul_brasil_coordinates_lat_lon.csv`: contém as cidades obtidas pelo site Wikipedia, o estado a que elas pertencem e sua respectiva latitude e longitude.
+- `cidades_sul_brasil_coordinates_lat_lon.csv`: Contém os mesmos dados do arquivo anterior, com a adição das coordenadas geográficas de cada cidade.
+
+Esta etapa do projeto segue o fluxograma:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
