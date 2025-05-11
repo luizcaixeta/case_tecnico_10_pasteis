@@ -50,6 +50,7 @@ Em `clima/scripts` está disponível o processo ETL utilizado para obter os dado
 
 `collect_weather.py` utiliza o arquivo `cidades_sul_brasil_coordinates_lat_lon.csv` para fazer a requisição na API open-meteo. O arquivo csv resultante (`weather_data_raw.csv`) é passado por `clean.py`, onde é realizada a limpeza e então o arquivo limpo é passado para `load.py`, onde é carregado para o banco de dados PostGres SupaBase.
 
+```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
 flowchart LR
     subgraph "Pipeline Climático"
@@ -79,6 +80,6 @@ flowchart LR
     style I fill:#f0f0f0,stroke:#333
     style J fill:#f0f0f0,stroke:#333
     style K fill:#f0f0f0,stroke:#333
-
+```
 
 
