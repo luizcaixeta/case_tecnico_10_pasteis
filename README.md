@@ -28,7 +28,7 @@ Nessa pasta, constam dois arquivos .csv:
 
 Em `clima/scripts` está disponível o processo ETL utilizado para obter os dados climáticos de todas as cidades percentecentes a região Sul do país. 
 
-
+```mermaid
 flowchart LR
     subgraph "Fase 1: Extração"
         A[Wikipedia] -->|BeautifulSoup/Requests| B[('cidades_sul_brasil.csv' Nomes das cidades)]
@@ -38,6 +38,6 @@ flowchart LR
         B -->|Lê CSV| C{Nominatim API}
         C --> D[('cidades_coordenadas.csv' cidade, estado, lat, long)]
     end
-
+```
 
 
