@@ -6,6 +6,8 @@ Este projeto tem como objetivo coletar, processar e analisar dados climáticos d
 
 ### 1. Coleta do nome das cidades: Extração via Web Scraping da lista de municípios dos trẽs estados da região Sul a partir da Wikipédia.
 
+📁 cidades_sul
+
 2. Obtenção de coordenadas geográficas: Uso da API Nominatim para adquirir latitude e longitude de cada cidade.
 
 3. Coleta de dados climáticos: Consulta à API open-meteo para obter informações metereológicas com base nas coordenadas obtidas.
