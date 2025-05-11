@@ -18,7 +18,7 @@ Objetivo: Extrair a lista de municípios dos três estados da região Sul a part
 
 Nessa pasta, constam dois arquivos .csv: 
 
-- `cidades_sul_brasil.csv`: Lista de cidades e o estado correspondente extraídas da Wikipédia.
+- `cidades_sul_brasil.csv`: Lista de cidades e seus respectivos estados, extraídos da Wikipédia.
 
 - `cidades_sul_brasil_coordinates_lat_lon.csv`: Contém os mesmos dados do arquivo anterior, com a adição das coordenadas geográficas de cada cidade.
 
