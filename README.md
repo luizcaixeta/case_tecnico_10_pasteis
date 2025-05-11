@@ -20,6 +20,21 @@ Nessa pasta, constam dois arquivos .csv:
 
 - `cidades_sul_brasil_coordinates_lat_lon.csv`: contém as cidades obtidas pelo site Wikipedia, o estado a que elas pertencem e sua respectiva latitude e longitude.
 
+```mermaid
+flowchart LR
+    subgraph "Fase 1: Extração"
+        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
+    end
+
+    subgraph "Fase 2: Geocoding"
+        B -->|Lê CSV| C{Nominatim API}
+        C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
+        C -->|Falha| E[Fila de Retentativas]
+        E -->|Repete| C
+    end
+
+    style E fill:#f96,stroke:#333
+```
 
 
 ### 2. Coleta de dados climáticos: Consulta à API open-meteo para obter informações metereológicas com base nas coordenadas obtidas.
@@ -28,16 +43,6 @@ Nessa pasta, constam dois arquivos .csv:
 
 Em `clima/scripts` está disponível o processo ETL utilizado para obter os dados climáticos de todas as cidades percentecentes a região Sul do país. 
 
-```mermaid
-flowchart LR
-    subgraph "Fase 1: Extração"
-        A[Wikipedia] -->|BeautifulSoup/Requests| B[('cidades_sul_brasil.csv' Nomes das cidades)]
-    end
 
-    subgraph "Fase 2: Geocoding"
-        B -->|Lê CSV| C{Nominatim API}
-        C --> D[('cidades_coordenadas.csv' cidade, estado, lat, long)]
-    end
-```
 
 
