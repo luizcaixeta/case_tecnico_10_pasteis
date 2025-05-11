@@ -59,7 +59,7 @@ flowchart LR
         C --> D{clean.py}
         D -->|Limpeza/Padronização| E[("weather_data_clean.csv")]
         E --> F{load.py}
-        F -->|psycopg2| G[(SupaBase\nPostgreSQL)]
+        F -->|psycopg2| G[(SupaBase PostgreSQL)]
         C -.->|Erro na API\nRetry| B
     end
 
