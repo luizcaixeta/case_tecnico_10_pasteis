@@ -2,20 +2,6 @@
 
 ## Descrição do projeto
 
-/case-tecnico-clima-sul
-│── /data
-│   ├── cidades_parana.csv
-│   ├── cidades_santa_catarina.csv
-│   ├── cidades_rio_grande_sul.csv
-│   ├── coordenadas_cidades.csv
-│   └── dados_climaticos.csv
-│── /src
-│   ├── extrair_cidades.py
-│   ├── obter_coordenadas.py
-│   └── coletar_dados_climaticos.py
-├── README.md
-└── requirements.txt
-
 Este projeto tem como objetivo coletar, processar e analisar dados climáticos das cidades da região Sul do Brasil (Paraná, Santa Catarina e Rio Grande do Sul). O processo está dividio em três etapas principais:
 
 ### 1. Coleta de dados geográficos de cidade do sul do Brasil: Extração via Web Scraping da lista de municípios dos três estados da região Sul a partir da Wikipédia e dados de latitude e longitude via API Nominatim.
