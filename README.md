@@ -110,3 +110,61 @@ Exemplo de gráfico que pode ser gerado:
 
 <img src="https://github.com/user-attachments/assets/d5f644e7-7dae-4a44-8b64-a936b4dd14e9" width="500"/>
 
+# Como rodar o projeto
+
+1. Clonar  repositório
+
+     `git clone https://github.com/luizcaixeta/case_tecnico_10_pasteis`
+     `cd case_tecnico_10_pasteis`
+
+2. Instale as dependências
+
+   `pip install -r requirements.txt`
+
+3. Execute a pipeline de coleta de dados
+
+a) Extração de cidades e coordenadas 
+
+```
+    cd cidades_sul/script
+    python get_cities.py
+    python get_lat_lon.py
+```
+
+Os arquivos `.csv` gerados estarão em `cidades_sul/data`.
+
+b) Coleta e tratamento de dados climáticos
+
+```
+    cd ../../clima/scripts
+    python collect_weather.py
+    python clean.py
+    python load.py
+```
+Nota: Certifique-se de configurar corretamente suas credenciais do Supabase em um arquivo `.env`, este arquivo deve conter:
+
+```
+    DB_HOST=seu_host
+    DB_PORT=porta_do_projeto
+    DB_NAME=postgres
+    DB_USER=postgres
+    DB_PASS=sua_senha
+```
+
+c) Gerar visualizações
+
+```
+    cd ../../plot_clima_tempo/scripts
+    python ptob_chuva.py
+    python temperatura_maxima.py
+    python temperatura_minima.py
+```
+
+Nota: Certifique-se de configurar corretamente suas credenciais do Supabase em um arquivo `.env`, este arquivo deve conter:
+
+```
+    SUPABASE_URL= 
+    SUPABASE_KEY=
+```
+    
+
