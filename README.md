@@ -31,7 +31,7 @@ flowchart LR
         B -->|Lê CSV| C{Nominatim API}
         C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
         C -->|Falha| E[Fila de Retentativas]
-        E -->|Repete após X segundos| C
+        E -->|Repete| C
     end
 
     style A fill:#e6f3ff,stroke:#333
