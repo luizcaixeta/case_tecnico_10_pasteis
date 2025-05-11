@@ -20,6 +20,9 @@ Nessa pasta, constam dois arquivos .csv:
 
 - `cidades_sul_brasil_coordinates_lat_lon.csv`: contém as cidades obtidas pelo site Wikipedia, o estado a que elas pertencem e sua respectiva latitude e longitude.
 
+![primeira_parte drawio](https://github.com/user-attachments/assets/62b74991-6616-48ce-8d4c-ef0c219d0f5d)
+
+
 ### 2. Coleta de dados climáticos: Consulta à API open-meteo para obter informações metereológicas com base nas coordenadas obtidas.
 
 📁clima/scripts
