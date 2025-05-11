@@ -150,6 +150,32 @@ Nota: Certifique-se de configurar corretamente suas credenciais do Supabase em u
     DB_USER=postgres
     DB_PASS=sua_senha
 ```
+Certifique-se também de que tenha criado uma tabela no banco de dados da forma
+
+```
+    CREATE TABLE clima_cidades_sul (
+  id SERIAL PRIMARY KEY,
+  cidade TEXT NOT NULL,
+  estado TEXT NOT NULL,
+  latitude DOUBLE PRECISION,
+  longitude DOUBLE PRECISION,
+  timestamp TIMESTAMP NOT NULL,
+  temperatura_max REAL,
+  temperatura_min REAL,
+  prob_chuva_max INTEGER,
+  prob_chuva_media INTEGER,
+  prob_chuva_min INTEGER,
+  quantidade_chuva REAL,
+  sensacao_termica_max REAL,
+  sensacao_termica_min REAL,
+  velocidade_vento_max DOUBLE PRECISION,
+  direcao_vento DOUBLE PRECISION,
+  duracao_sol REAL,
+  uv_max INTEGER,
+  dia_semana TEXT,
+  chance_alta_de_chuva BOOLEAN
+);
+```
 
 c) Gerar visualizações
 
