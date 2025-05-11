@@ -96,10 +96,11 @@ O banco de dados é consultado a partir do SUPABASE_URL e SUPABASE_KEY e, para t
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
-flowchart LR
+flowchart TD
     %% Fase 1
     subgraph "Fase 1: Extração"
-        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
+        A[Wikipedia]
+        A -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
     end
 
     %% Fase 2
@@ -145,6 +146,7 @@ flowchart LR
     style L2 fill:#f0f0f0,stroke:#333
     style L3 fill:#f0f0f0,stroke:#333
     style L4 fill:#f0f0f0,stroke:#333
+
 ```
 
 
