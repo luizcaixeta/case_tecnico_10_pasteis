@@ -68,11 +68,11 @@ flowchart LR
         D -->|Limpeza/Padronização| E[("weather_data_clean.csv")]
         E --> F{load.py}
         F -->|psycopg2| G[(SupaBase PostgreSQL)]
-        C -.->|Erro na API\nRetry| B
+        C -.->|Erro na API Retry| B
     end
 
     subgraph "Detalhes do load.py"
-        F --> H[Lê .env\nDB_HOST, DB_USER...]
+        F --> H[Lê .env DB_HOST, DB_USER...]
         H --> I[Conecta via psycopg2]
         I --> J[INSERT linha-a-linha]
         J --> K[Commit transação]
