@@ -97,13 +97,12 @@ O banco de dados é consultado a partir do SUPABASE_URL e SUPABASE_KEY e, para t
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
 flowchart TD
-    %% Fase 1
+    %% Fase 1: Extração
     subgraph "Fase 1: Extração"
-        A[Wikipedia]
-        A -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
+        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
     end
 
-    %% Fase 2
+    %% Fase 2: Geocoding
     subgraph "Fase 2: Geocoding"
         B -->|Lê CSV| C{Nominatim API}
         C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
@@ -111,23 +110,25 @@ flowchart TD
         E -->|Repete| C
     end
 
-    %% Fase 3
+    %% Conexão entre fases
+    D --> COLLECT
+
+    %% Fase 3: Pipeline Climático
     subgraph "Fase 3: Pipeline Climático"
-        D --> F3A{collect_weather.py}
-        F3A -->|API Open-Meteo| F3B[("weather_data_raw.csv")]
-        F3B --> F3C{clean.py}
-        F3C -->|Limpeza/Padronização| F3D[("weather_data_clean.csv")]
-        F3D --> F3E{load.py}
-        F3E -->|psycopg2| F3F[(SupaBase PostgreSQL)]
-        F3B -.->|Erro na API\nRetry| F3A
+        COLLECT{{collect_weather.py}} -->|API Open-Meteo| RAW[("weather_data_raw.csv")]
+        RAW --> CLEAN{{clean.py}}
+        CLEAN -->|Limpeza/Padronização| CLEANED[("weather_data_clean.csv")]
+        CLEANED --> LOAD{{load.py}}
+        LOAD -->|psycopg2| DB[(SupaBase PostgreSQL)]
+        RAW -.->|Erro na API\nRetry| COLLECT
     end
 
-    %% Detalhes do load.py
+    %% Detalhes load.py à direita
     subgraph "Detalhes do load.py"
-        F3E --> L1[Lê .env\nDB_HOST, DB_USER...]
-        L1 --> L2[Conecta via psycopg2]
-        L2 --> L3[INSERT linha-a-linha]
-        L3 --> L4[Commit transação]
+        LOAD --> ENV[Lê .env\nDB_HOST, DB_USER...]
+        ENV --> CONN[Conecta via psycopg2]
+        CONN --> INSERT[INSERT linha-a-linha]
+        INSERT --> COMMIT[Commit transação]
     end
 
     %% Estilos
@@ -136,16 +137,18 @@ flowchart TD
     style C fill:#ffeb99,stroke:#333
     style D fill:#e6ffe6,stroke:#333
     style E fill:#ffcccc,stroke:#333
-    style F3A fill:#ffeb99,stroke:#333
-    style F3B fill:#ffe6cc,stroke:#333
-    style F3C fill:#ffeb99,stroke:#333
-    style F3D fill:#e6f3ff,stroke:#333
-    style F3E fill:#ffeb99,stroke:#333
-    style F3F fill:#e6e6ff,stroke:#333
-    style L1 fill:#f0f0f0,stroke:#333
-    style L2 fill:#f0f0f0,stroke:#333
-    style L3 fill:#f0f0f0,stroke:#333
-    style L4 fill:#f0f0f0,stroke:#333
+
+    style COLLECT fill:#ffeb99,stroke:#333
+    style RAW fill:#ffe6cc,stroke:#333
+    style CLEAN fill:#ffeb99,stroke:#333
+    style CLEANED fill:#e6f3ff,stroke:#333
+    style LOAD fill:#ffeb99,stroke:#333
+    style DB fill:#e6e6ff,stroke:#333
+
+    style ENV fill:#f0f0f0,stroke:#333
+    style CONN fill:#f0f0f0,stroke:#333
+    style INSERT fill:#f0f0f0,stroke:#333
+    style COMMIT fill:#f0f0f0,stroke:#333
 
 ```
 
