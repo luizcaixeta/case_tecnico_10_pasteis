@@ -94,5 +94,58 @@ O banco de dados é consultado a partir do SUPABASE_URL e SUPABASE_KEY e, para t
 <img src="https://github.com/user-attachments/assets/d5f644e7-7dae-4a44-8b64-a936b4dd14e9" width="500"/>
 
 
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
+flowchart LR
+    %% Fase 1
+    subgraph "Fase 1: Extração"
+        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
+    end
+
+    %% Fase 2
+    subgraph "Fase 2: Geocoding"
+        B -->|Lê CSV| C{Nominatim API}
+        C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
+        C -->|Falha| E[Fila de Retentativas]
+        E -->|Repete| C
+    end
+
+    %% Fase 3
+    subgraph "Fase 3: Pipeline Climático"
+        D --> F3A{collect_weather.py}
+        F3A -->|API Open-Meteo| F3B[("weather_data_raw.csv")]
+        F3B --> F3C{clean.py}
+        F3C -->|Limpeza/Padronização| F3D[("weather_data_clean.csv")]
+        F3D --> F3E{load.py}
+        F3E -->|psycopg2| F3F[(SupaBase PostgreSQL)]
+        F3B -.->|Erro na API\nRetry| F3A
+    end
+
+    %% Detalhes do load.py
+    subgraph "Detalhes do load.py"
+        F3E --> L1[Lê .env\nDB_HOST, DB_USER...]
+        L1 --> L2[Conecta via psycopg2]
+        L2 --> L3[INSERT linha-a-linha]
+        L3 --> L4[Commit transação]
+    end
+
+    %% Estilos
+    style A fill:#e6f3ff,stroke:#333
+    style B fill:#e6ffe6,stroke:#333
+    style C fill:#ffeb99,stroke:#333
+    style D fill:#e6ffe6,stroke:#333
+    style E fill:#ffcccc,stroke:#333
+    style F3A fill:#ffeb99,stroke:#333
+    style F3B fill:#ffe6cc,stroke:#333
+    style F3C fill:#ffeb99,stroke:#333
+    style F3D fill:#e6f3ff,stroke:#333
+    style F3E fill:#ffeb99,stroke:#333
+    style F3F fill:#e6e6ff,stroke:#333
+    style L1 fill:#f0f0f0,stroke:#333
+    style L2 fill:#f0f0f0,stroke:#333
+    style L3 fill:#f0f0f0,stroke:#333
+    style L4 fill:#f0f0f0,stroke:#333
+```
+
 
 
