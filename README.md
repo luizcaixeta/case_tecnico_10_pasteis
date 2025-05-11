@@ -46,13 +46,17 @@ flowchart LR
 ```
 
 
-### 2. Coleta de dados climáticos: Consulta à API open-meteo para obter informações metereológicas com base nas coordenadas obtidas.
+### 2. Coleta de dados climáticos
+
+Objetivo: Obter dados metereológicos dos três próximos dias (sábado, domingo e segunda-feira) para cada cidade com base em suas coordenadas, utilizando a API Open-Meteo.
 
 📁clima/scripts
 
-Em `clima/scripts` está disponível o processo ETL utilizado para obter os dados climáticos de todas as cidades percentecentes a região Sul do país. 
+- `collect_weather.py:` Realiza requisições à API Open-Meteo com base nas coordenadas presentes no arquivo cidades_sul_brasil_coordinates_lat_lon.csv, gerando o arquivo weather_data_raw.csv.
 
-`collect_weather.py` utiliza o arquivo `cidades_sul_brasil_coordinates_lat_lon.csv` para fazer a requisição na API open-meteo. O arquivo csv resultante (`weather_data_raw.csv`) é passado por `clean.py`, onde é realizada a limpeza e então o arquivo limpo é passado para `load.py`, onde é carregado para o banco de dados PostGres SupaBase.
+- `clean.py:` Responsável pela limpeza dos dados brutos.
+
+- `load.py:` Carrega os dados tratados para um banco de dados PostgreSQL hospedado no Supabase.
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
@@ -88,12 +92,21 @@ flowchart LR
 
 ```
 
-### 3. Consumindo o banco de dados 
+### 3. Consumindo o banco de dados - visualização
+
+Objetivo: Consumir os dados do banco de dados Supabase para gerar visualizações dos dados.
 
 📁 plot_clima_tempo/scripts
 
-O banco de dados é consultado a partir do SUPABASE_URL e SUPABASE_KEY e, para testes, foram criados os códigos `prob_chuva.py`, `temperatura_maxima.py` e `temperatura_minima.py`. Esses gráficos utilizam um arquivo .shapefile da região sul, disponibilizado pelo IBGE, para delimitar o território e realizar uma interpolação, resultando em gráficos climáticos como:
+A partir das credenciais `SUPABASE_URL` e `SUPABASE_KEY`, o banco de dados é acessado para gerar diferentes gráficos, utilizando um arquivo shapefile da região Sul do Brasil (disponibilizado pelo IBGE) para delimitação geográfica e interpolação espacial.
 
+Scripts disponíveis para visualização:
+
+- `prob_chuva.py`: mapa de probabilidade de chuva;
+- `temperatura_maxima.py`: mapa de temperatura máxima;
+- `temperatura_minima.py`: mapa de temperatura mínima.
+
+Exemplo de gráfico que pode ser gerado:
 
 <img src="https://github.com/user-attachments/assets/d5f644e7-7dae-4a44-8b64-a936b4dd14e9" width="500"/>
 
