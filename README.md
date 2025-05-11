@@ -2,9 +2,9 @@
 
 ## Descrição do projeto
 
-Este projeto tem como objetivo coletar, processar e analisar dados climáticos das cidades da região Sul do Brasil (Paraná, Santa Catarina e Rio Grande do Sul). O processo envolveu três etapas principais:
+Este projeto tem como objetivo coletar, processar e analisar dados climáticos das cidades da região Sul do Brasil (Paraná, Santa Catarina e Rio Grande do Sul). O processo está dividio em três etapas principais:
 
-1. Coleta do nome das cidades: Extração via Web Scraping da lista de municípios dos trẽs estados da região Sul a partir da Wikipédia.
+### 1. Coleta do nome das cidades: Extração via Web Scraping da lista de municípios dos trẽs estados da região Sul a partir da Wikipédia.
 
 2. Obtenção de coordenadas geográficas: Uso da API Nominatim para adquirir latitude e longitude de cada cidade.
 
