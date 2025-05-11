@@ -29,7 +29,7 @@ flowchart LR
 
     subgraph "Fase 2: Geocoding"
         B -->|Lê CSV| C{Nominatim API}
-        C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
+        C -->|Sucesso| D[("cidades_sul_brasil_coordinates_lat_lon.csv"\ncidade, estado, lat, long)]
         C -->|Falha| E[Fila de Retentativas]
         E -->|Repete| C
     end
@@ -44,6 +44,38 @@ flowchart LR
 
 Em `clima/scripts` está disponível o processo ETL utilizado para obter os dados climáticos de todas as cidades percentecentes a região Sul do país. 
 
+`collect_weather.py` utiliza o arquivo `cidades_sul_brasil_coordinates_lat_lon.csv` para fazer a requisição na API open-meteo. O arquivo csv resultante (`weather_data_raw.csv`) é passado por `clean.py`, onde é realizada a limpeza e então o arquivo limpo é passado para `load.py`, onde é carregado para o banco de dados PostGres SupaBase.
 
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
+flowchart TD
+    subgraph "Pipeline Climático"
+        A[("cidades_sul_brasil_coordinates_lat_lon.csv")] --> B{collect_weather.py}
+        B -->|API Open-Meteo| C[("weather_data_raw.csv")]
+        C --> D{clean.py}
+        D -->|Limpeza/Padronização| E[("weather_data_clean.csv")]
+        E --> F{load.py}
+        F -->|psycopg2| G[(SupaBase\nPostgreSQL)]
+    end
+
+    subgraph "Detalhes do load.py"
+        F --> H[Lê .env\nDB_HOST, DB_USER...]
+        H --> I[Conecta via psycopg2]
+        I --> J[INSERT linha-a-linha]
+        J --> K[Commit transação]
+    end
+
+    style A fill:#e6ffe6,stroke:#333
+    style B fill:#ffeb99,stroke:#333
+    style C fill:#ffe6cc,stroke:#333
+    style D fill:#ffeb99,stroke:#333
+    style E fill:#e6f3ff,stroke:#333
+    style F fill:#ffeb99,stroke:#333
+    style G fill:#e6e6ff,stroke:#333
+    style H fill:#f0f0f0,stroke:#333
+    style I fill:#f0f0f0,stroke:#333
+    style J fill:#f0f0f0,stroke:#333
+    style K fill:#f0f0f0,stroke:#333
+```
 
 
