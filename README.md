@@ -153,7 +153,7 @@ Nota: Certifique-se de configurar corretamente suas credenciais do Supabase em u
 Certifique-se também de que tenha criado uma tabela no banco de dados da forma
 
 ```
-    CREATE TABLE clima_cidades_sul (
+CREATE TABLE clima_cidades_sul (
   id SERIAL PRIMARY KEY,
   cidade TEXT NOT NULL,
   estado TEXT NOT NULL,
