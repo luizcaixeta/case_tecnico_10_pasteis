@@ -28,12 +28,12 @@ Esta etapa do projeto segue o fluxograma:
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
 flowchart LR
     subgraph "Fase 1: Extração"
-        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
+        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv" Nomes das cidades)]
     end
 
     subgraph "Fase 2: Geocoding"
         B -->|Lê CSV| C{Nominatim API}
-        C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
+        C -->|Sucesso| D[("cidades_coordenadas.csv" cidade, estado, lat, long)]
         C -->|Falha| E[Fila de Retentativas]
         E -->|Repete| C
     end
