@@ -188,5 +188,14 @@ Nota: Certifique-se de configurar corretamente suas credenciais do Supabase em u
     SUPABASE_URL= 
     SUPABASE_KEY=
 ```
+
+Caso queira visualizar o resultado, está disponível em:
+
+📁 arquivo_banco_dados
+
+
+Agradeço a oportunidade!
+
+
     
 
