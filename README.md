@@ -22,28 +22,23 @@ Nessa pasta, constam dois arquivos .csv:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'background': '#ffffff', 'primaryBorderColor': '#000000', 'lineColor': '#000000'}}}%%
-flowchart TB
-    A[("cidades_sul_brasil_coordinates_lat_lon.csv")] --> B{collect_weather.py}
-    
-    B --> C{API Open-Meteo}
-    C -->|Sucesso| D[weather_data_raw.csv]
-    C -->|Falha| E[Espera 5s\n+ Retry]
-    E --> C
-    
-    D --> F{clean.py}
-    F --> G[weather_data_clean.csv]
-    G --> H{load.py}
-    H -->|psycopg2| I[(SupaBase)]
-    
-    style A fill:#e6ffe6,stroke:#333
-    style B fill:#ffeb99,stroke:#333
-    style C fill:#ff9999,stroke:#333
-    style D fill:#e6f3ff,stroke:#333
-    style E fill:#ffcc99,stroke:#333
-    style F fill:#ffeb99,stroke:#333
-    style G fill:#e6f3ff,stroke:#333
-    style H fill:#ffeb99,stroke:#333
-    style I fill:#e6e6ff,stroke:#333
+flowchart LR
+    subgraph "Fase 1: Extração"
+        A[Wikipedia] -->|BeautifulSoup/Requests| B[("cidades_sul_brasil.csv"\nNomes das cidades)]
+    end
+
+    subgraph "Fase 2: Geocoding"
+        B -->|Lê CSV| C{Nominatim API}
+        C -->|Sucesso| D[("cidades_coordenadas.csv"\ncidade, estado, lat, long)]
+        C -->|Falha| E[Fila de Retentativas]
+        E -->|Repete após X segundos| C
+    end
+
+    style A fill:#e6f3ff,stroke:#333
+    style B fill:#e6ffe6,stroke:#333
+    style C fill:#ffeb99,stroke:#333
+    style D fill:#e6ffe6,stroke:#333
+    style E fill:#ffcccc,stroke:#333
 ```
 
 
